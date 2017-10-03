@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Fav Episodes</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Episode</th>
+      <th>Favorite</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @fav_episodes.each do |fav_episode| %>
+      <tr>
+        <td><%= fav_episode.user %></td>
+        <td><%= fav_episode.episode %></td>
+        <td><%= fav_episode.favorite %></td>
+        <td><%= link_to 'Show', fav_episode %></td>
+        <td><%= link_to 'Edit', edit_fav_episode_path(fav_episode) %></td>
+        <td><%= link_to 'Destroy', fav_episode, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Fav Episode', new_fav_episode_path %>

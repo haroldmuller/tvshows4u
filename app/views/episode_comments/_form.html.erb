@@ -1,0 +1,32 @@
+<%= form_for(episode_comment) do |f| %>
+  <% if episode_comment.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(episode_comment.errors.count, "error") %> prohibited this episode_comment from being saved:</h2>
+
+      <ul>
+      <% episode_comment.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :user_id %>
+    <%= f.text_field :user_id, value: current_user.id, :readonly => true%>
+  </div>
+
+  <div class="field">
+    <%= f.label :episode_id %>
+    <%= f.text_field :episode_id, value: params["episode_id"], :readonly => true %>
+  </div>
+
+  <div class="field">
+    <%= f.label :content %>
+    <%= f.text_field :content %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Subject:</strong>
+  <%= @mailingl_form.subject %>
+</p>
+
+<p>
+  <strong>Body:</strong>
+  <%= @mailingl_form.body %>
+</p>
+
+<p>
+  <strong>To:</strong>
+  <%= @mailingl_form.to %>
+</p>
+
+<%= link_to 'Edit', edit_mailingl_form_path(@mailingl_form) %> |
+<%= link_to 'Back', mailingl_forms_path %>

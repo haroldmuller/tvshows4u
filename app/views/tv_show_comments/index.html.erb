@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Tv Show Comments</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Tv show</th>
+      <th>Content</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @tv_show_comments.each do |tv_show_comment| %>
+      <tr>
+        <td><%= tv_show_comment.user %></td>
+        <td><%= tv_show_comment.tv_show %></td>
+        <td><%= tv_show_comment.content %></td>
+        <td><%= link_to 'Show', tv_show_comment %></td>
+        <td><%= link_to 'Edit', edit_tv_show_comment_path(tv_show_comment) %></td>
+        <td><%= link_to 'Destroy', tv_show_comment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Tv Show Comment', new_tv_show_comment_path %>

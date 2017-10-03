@@ -1,0 +1,82 @@
+<p id="notice"><%= notice %></p>
+<div class="verticalLine" style="padding:15px">
+  <p>
+    <h3><%= @episode.name %></h3>
+  </p>
+
+  <p>
+    <strong>Description:</strong>
+    <%= @episode.description %>
+  </p>
+
+  <p>
+    <strong>Season:</strong>
+    <%= @episode.season %>
+  </p>
+
+  <p>
+    <strong>Duration:</strong>
+    <%= @episode.duration %> minutes
+  </p>
+
+  <p>
+    <strong>Release year:</strong>
+    <%= @episode.release_year %>
+  </p>
+
+  <p>
+    <strong>Rating:</strong>
+    <%= @episode.rating %>
+  </p>
+
+  <p>
+    <strong>Favorite</strong>
+    <% if user_signed_in? %>
+      <%if @favs != nil%>
+        <%if @favs.find_by(user_id: current_user.id, episode_id: @episode.id) != nil%>
+          <%= @favs.find_by(user_id: current_user.id, episode_id: @episode.id).favorite%>
+        <%else%>
+          <%= button_to 'Favorito', '/fev', method: :get, params: { user_id: current_user.id, episode_id: @episode.id }, class: "btn btn-danger" %>
+        <%end%>
+      <%else%>
+        <%= "False"%>
+        <%= button_to 'Favorito', '/fev', method: :get, params: { user_id: current_user.id, episode_id: @episode.id } %>
+      <%end%>
+    <% end %>
+    <br>
+  </p>
+</div>
+
+
+<h3>Comentarios</h3>
+<br>
+<% if user_signed_in? %>
+  <% if current_user.role == 2 || current_user.id == @tv_show.user_id %>
+    <%= link_to "", new_episode_comment_path(:episode_id=> @episode.id, :user_id => current_user.id), class: "btn btn-danger fa fa-plus fa-lg" %>
+  <% end %>
+<% end %>
+<br>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>User</th>
+        <th>Comment</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%@episode_comments.each do |t|%>
+        <%if t.episode_id == @episode.id%>
+        <%if user_signed_in? %>
+            <tr>
+              <td><%= @users.find(t.user_id).first_name%></td>
+              <td><%= t.content %></td>
+              <%if (t.user_id == current_user.id) or (current_user.role == 2)%>
+                <td><%= link_to 'Delete', episode_comment_path(:id => t.id, :user_id => t.user_id,:episode_id => t.episode_id), method: :delete %></td
+              <%end%>
+            </tr>
+          <%end%>
+        <%end%>
+      <%end%>
+    </tbody>
+  </table>

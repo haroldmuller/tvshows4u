@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Episode Ratins</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Rating</th>
+      <th>Favorite</th>
+      <th>Seen</th>
+      <th>User</th>
+      <th>Episode</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @episode_ratins.each do |episode_ratin| %>
+      <tr>
+        <td><%= episode_ratin.rating %></td>
+        <td><%= episode_ratin.favorite %></td>
+        <td><%= episode_ratin.seen %></td>
+        <td><%= episode_ratin.user.id %></td>
+        <td><%= episode_ratin.episode.id %></td>
+        <td><%= link_to 'Show', episode_ratin %></td>
+        <td><%= link_to 'Edit', edit_episode_ratin_path(episode_ratin) %></td>
+        <td><%= link_to 'Destroy', episode_ratin, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Episode Ratin', new_episode_ratin_path %>

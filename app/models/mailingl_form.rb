@@ -1,0 +1,2 @@
+class MailinglForm < ApplicationRecord
+end

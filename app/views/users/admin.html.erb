@@ -1,0 +1,74 @@
+<%= stylesheet_link_tag    'application' %>
+<%= javascript_include_tag 'defaults' %>
+<%= javascript_include_tag "http://www.google.com/jsapi", "chartkick" %>
+<%= stylesheet_link_tag 'http://yandex.st/bootstrap/3.1.1/css/bootstrap.min.css' %>
+<div class="col-sm-9 col-md-10" style="background-color:rgb(38, 38, 38)">
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs">
+                <li><a href="#users" data-toggle="tab"><span class="glyphicon glyphicon-user"></span>
+                    User</a></li>
+                <li><a href="#tvshows" data-toggle="tab"><span class="glyphicon glyphicon-film"></span>
+                    TV Shows</a></li>
+                <li><a href="#graphs" data-toggle="tab"><span class="glyphicon glyphicon-tags"></span>
+                    Graphs</a></li>
+            </ul>
+            <!-- Tab panes -->
+            <div class="tab-content" style="background-color:rgb(38, 38, 38)">
+                <div class="tab-pane fade in active" style="background-color:rgb(38, 38, 38)" id="users">
+                    <div class="list-group" style="background-color:rgb(38, 38, 38)">
+                        <% @users.each do |user| %>
+                          <li class="list-group-item" style="background-color:rgb(38, 38, 38)"><%= link_to user.last_name+', '+user.first_name, user_path(user), style: "color:white"%><div class="divider"/>
+                            <span><%= user.role %></span>
+                            <span class="pull-right" style="color:white"><%= button_to "edit", edit_user_path(user), class: "btn btn-info btn-xs", style: 'color:white', method: :get %> </span>
+                            <span class="pull-right" style="color:rgb(38,38,38)"> - </span>
+                            <span class="pull-right"> <%= button_to "delete", user_path(user), class: "btn btn-danger btn-xs", style: 'color:white', method: :delete %> </span></li>
+                        <% end %>
+                    </div>
+                </div>
+                <div class="tab-pane fade in" id="tvshows" style="background-color:rgb(38, 38, 38)">
+                    <div class="list-group" style="background-color:rgb(38, 38, 38)">
+                      <% @tv_shows.each do |tv_show| %>
+                        <% owner = User.find(tv_show.user_id) %>
+                        <li class="list-group-item" style="background-color:rgb(38, 38, 38)"><%= link_to tv_show.name, tv_show_path(tv_show), style: "color:white"%><div class="divider"/>
+                          <span>Owner: <%= link_to owner.last_name+", "+owner.first_name, user_path(owner)  %></span>
+
+                          <span class="pull-right"><%= button_to "edit", edit_tv_show_path(tv_show), class: "btn btn-info btn-xs", style: 'color:white', method: :get %> </span>
+                          <span class="pull-right" style="color:rgb(38,38,38)"> - </span>
+                          <span class="pull-right"> <%= button_to "delete", tv_show_path(tv_show), class: "btn btn-danger btn-xs", style: 'color:white', method: :delete %> </span>
+                          </li>
+                      <% end %>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade in" id="graphs">
+
+                    <div class="col-xs-6">
+                        <h> Series by country </h>
+                        <%= pie_chart @tv_shows.group(:country).count %>
+
+                        <h> Series by gender </h>
+                        <%= pie_chart @tv_shows.group(:gender_id).count %>
+
+                        <h> Series by directors </h>
+                        <%= pie_chart @tv_shows.group(:director_id).count %>
+
+                        <h> Series uploaded by week </h>
+                        <%= line_chart @tv_shows.group_by_week(:created_at).count %>
+
+                        <h> Episodes uploaded by week </h>
+                        <%= line_chart @episodes.group_by_week(:created_at).count, discrete: true %>
+
+                        <h> Episodes seen against unseen </h>
+                        <%= pie_chart @episodes.group(:seen).count %>
+
+                        <h> Episodes by rating </h>
+                        <%= column_chart @episodes.group(:rating).count %>
+
+                        <h> New users by month </h>
+                        <%= line_chart @users.group_by_month(:created_at).count, discrete: true %>
+
+
+                    </div>
+                </div>
+              </div>
+        </div>

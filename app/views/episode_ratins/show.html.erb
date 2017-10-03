@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Rating:</strong>
+  <%= @episode_ratin.rating %>
+</p>
+
+<p>
+  <strong>Favorite:</strong>
+  <%= @episode_ratin.favorite %>
+</p>
+
+<p>
+  <strong>Seen:</strong>
+  <%= @episode_ratin.seen %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @episode_ratin.user %>
+</p>
+
+<p>
+  <strong>Episode:</strong>
+  <%= @episode_ratin.episode %>
+</p>
+
+<%= link_to 'Edit', edit_episode_ratin_path(@episode_ratin) %> |
+<%= link_to 'Back', episode_ratins_path %>

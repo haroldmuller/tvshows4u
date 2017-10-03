@@ -1,0 +1,32 @@
+<%= form_for(fav_episode) do |f| %>
+  <% if fav_episode.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(fav_episode.errors.count, "error") %> prohibited this fav_episode from being saved:</h2>
+
+      <ul>
+      <% fav_episode.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :user_id %>
+    <%= f.text_field :user_id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :episode_id %>
+    <%= f.text_field :episode_id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :favorite %>
+    <%= f.check_box :favorite %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

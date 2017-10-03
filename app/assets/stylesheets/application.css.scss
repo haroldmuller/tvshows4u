@@ -1,0 +1,180 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ */
+
+
+ @import "bootstrap-sprockets";
+ @import "bootstrap";
+ @import "font-awesome";
+
+ body{
+     background-color: rgb(38, 38, 38);
+ }
+
+ #login-dp{
+     min-width: 250px;
+     padding: 14px 14px 0;
+     overflow:hidden;
+     background-color:rgba(255,255,255,.8);
+ }
+ #login-dp .help-block{
+     font-size:12px
+ }
+ #login-dp .bottom{
+     background-color:rgba(255,255,255,.8);
+     border-top:1px solid #ddd;
+     clear:both;
+     padding:14px;
+ }
+ #login-dp .social-buttons{
+     margin:12px 0
+ }
+ #login-dp .social-buttons a{
+     width: 49%;
+ }
+ #login-dp .form-group {
+     margin-bottom: 10px;
+ }
+ .btn-fb{
+     color: #fff;
+     background-color:#3b5998;
+ }
+ .btn-fb:hover{
+     color: #fff;
+     background-color:#496ebc
+ }
+ .btn-tw{
+     color: #fff;
+     background-color:#55acee;
+ }
+ .btn-tw:hover{
+     color: #fff;
+     background-color:#59b5fa;
+ }
+ @media(max-width:768px){
+     #login-dp{
+         background-color: inherit;
+         color: #fff;
+     }
+     #login-dp .bottom{
+         background-color: inherit;
+         border-top:0 none;
+     }
+ }
+
+ .navbar-nav>li>a.profile-image {
+     padding-top: 10px;
+     padding-bottom: 10px;
+ }
+
+ .special-img
+{
+    position: relative;
+    top: -5px;
+    float: left;
+    left: -5px;
+}
+
+div {
+   color: #b2b2b2;
+}
+
+.division{
+  width:50%;
+  height:100px;
+  float:left;
+}
+
+.bgimg {
+    background-image: url('http://authors.appadvice.com/wp-content/appadvice-v2-media/2016/11/Netflix-background_860c8ece6b34fb4f43af02255ca8f225.jpg');
+    width: 550px;
+    height: 500px;
+    opacity: 0.2;
+}
+
+.glyphicon {
+    font-size: 20px;
+    color:white;
+}
+
+.flex-container {
+    width: auto;
+    height: 350px;
+    background-color: rgb(38, 38, 38);
+    -webkit-justify-content: center;
+    justify-content: center;
+    padding: .5vw;
+    display: -ms-flexbox;
+    -ms-flex-wrap: wrap;
+    -ms-flex-direction: column;
+    -webkit-flex-flow: row wrap;
+    flex-flow: row wrap;
+    display: -webkit-box;
+    display: flex;
+}
+
+.flex-item {
+    background-color: rgb(38, 38, 38);
+    width: 300px;
+    height: auto;
+    margin: 0px;
+}
+
+.img-responsive {
+  width: 200px;
+  height: 300px;
+}
+
+.textarea {
+  rows: 10;
+  columns: 30;
+}
+
+admin-body{ margin-top:50px;}
+.nav-tabs .glyphicon:not(.no-margin) { margin-right:10px; }
+.tab-pane .list-group-item:first-child {border-top-right-radius: 0px;border-top-left-radius: 0px;}
+.tab-pane .list-group-item:last-child {border-bottom-right-radius: 0px;border-bottom-left-radius: 0px;}
+.tab-pane .list-group .checkbox { display: inline-block;margin: 0px; }
+.tab-pane .list-group input[type="checkbox"]{ margin-top: 2px; }
+.tab-pane .list-group .glyphicon { margin-right:5px; }
+.tab-pane .list-group .glyphicon:hover { color:#FFBC00; }
+a.list-group-item.read { color: #222;background-color: #F3F3F3; }
+hr { margin-top: 5px;margin-bottom: 10px; }
+.nav-pills>li>a {padding: 5px 10px;}
+
+.ad { padding: 5px;background: #F5F5F5;color: #222;font-size: 80%;border: 1px solid #E5E5E5; }
+.ad a.title {color: #15C;text-decoration: none;font-weight: bold;font-size: 110%;}
+.ad a.url {color: #093;text-decoration: none;}
+
+  .circular--square {
+  border-radius: 50%;
+}
+
+.circular--landscape {
+  display: inline-block;
+  position: relative;
+  width: 200px;
+  height: 200px;
+  overflow: hidden;
+  border-radius: 50%;
+}
+
+.circular--landscape img {
+  width: auto;
+  height: 100%;
+  margin-left: -50px;
+}
+
+  .verticalLine {
+  border-left: thick solid #ff0000;
+}

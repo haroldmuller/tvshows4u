@@ -1,0 +1,68 @@
+<%= form_for(mailingl_form) do |f| %>
+
+  <% if mailingl_form.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(mailingl_form.errors.count, "error") %> prohibited this mailingl_form from being saved:</h2>
+
+      <ul>
+      <% mailingl_form.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label 'Subject: ' %>
+    <%= f.text_field :subject,  :id=>'subject', :size => '150', :readonly => true %>
+  </div>
+  <br>
+
+  <div class="field">
+    <%= f.label 'Message:' %>
+    <%= f.text_field :body, :id =>'body', :size => '149' %>
+  </div>
+  <br>
+
+  <div>
+    <%= f.label 'Receiver:' %>
+    <%= f.text_field :to,:id=>'receiver', :size => '50' %>
+  </div>
+  <br>
+  <div class="actions">
+    <button  id='send_button', onclick="send_mail()", class: "btn btn-danger" > Send! </button>
+  </div>
+<% end %>
+
+<script>
+function send_mail() {
+  if(validate()){
+    alert("We're sending your message");
+    f.submit()
+
+
+
+  }
+
+}
+
+function validateEmail(email) {
+  var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return re.test(email);
+}
+
+function validate() {
+  var email = $("#receiver").val();
+  if (validateEmail(email)) {
+    return true
+  } else {
+    document.getElementById("receiver").value = "";
+    alert('The email is not valid :(')
+    return false;
+
+  }
+
+}
+
+
+</script>

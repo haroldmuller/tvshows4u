@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  ranting: 1
+  favorite: false
+  user: one
+  tv_show: one
+
+two:
+  ranting: 1
+  favorite: false
+  user: two
+  tv_show: two

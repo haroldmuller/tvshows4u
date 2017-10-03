@@ -1,0 +1,17 @@
+<h1>New Episode Ratin</h1>
+<%var = 0%>
+<%if @episode_ratins == nil%>
+  <%= render 'forma', episode_ratin: @episode_ratin %>
+<%else%>
+  <%@episode_ratins.each do |t|%>
+    <%if (t.user_id.to_s == @episode_ratin.user_id.to_s) && (t.episode_id.to_s == @episode_ratin.episode_id.to_s)%>
+      <% controller.redirect_to edit_episode_ratin_path(t.id) %>
+      <%var = 1%>
+      <%break%>
+    <%end%>
+  <%end%>
+  <%if var == 0%>
+    <%= render 'forma', episode_ratin: @episode_ratin %>
+    <%= link_to 'Back', episode_ratins_path %>
+  <%end%>
+<%end%>

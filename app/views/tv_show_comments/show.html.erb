@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @tv_show_comment.user %>
+</p>
+
+<p>
+  <strong>Tv show:</strong>
+  <%= @tv_show_comment.tv_show %>
+</p>
+
+<p>
+  <strong>Content:</strong>
+  <%= @tv_show_comment.content %>
+</p>
+
+<%= link_to 'Edit', edit_tv_show_comment_path(@tv_show_comment) %> |
+<%= link_to 'Back', tv_show_comments_path %>

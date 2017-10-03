@@ -1,0 +1,18 @@
+class DropEpisodeRating < ActiveRecord::Migration[5.0]
+
+  def up
+    drop_table :episode_ratings
+  end
+
+  def down
+    create_table :episode_ratings do |t|
+      t.integer :ranting
+      t.boolean :favorite
+      t.boolean :seen
+      t.references :user, foreign_key: true
+      t.references :episode, foreign_key: true
+
+      t.timestamps
+    end
+  end
+end

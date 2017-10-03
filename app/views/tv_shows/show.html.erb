@@ -1,0 +1,184 @@
+<p id="notice"><%= notice %></p>
+
+<% if user_signed_in? %>
+  <% if current_user.role == 2 || current_user.id == @tv_show.user_id %>
+    <%= link_to "", edit_tv_show_path(@tv_show), class: "btn btn-danger fa fa-pencil fa-lg" %>
+    <%= link_to "", tv_show_path(@tv_show), method: :delete, class: "btn btn-danger fa fa-trash-o fa-lg", data: { confirm: 'Are you sure?' } %>
+  <% end %>
+<% end %>
+<br></br>
+<div class="col-sm-3">
+  <p>
+    <%= image_tag @tv_show.cover(:medium) %>
+  </p>
+</div>
+<div class="col-sm-9 verticalLine">
+  <p>
+    <h1> <%= @tv_show.name %> </h1>
+  </p>
+
+  <p>
+    <h4> <%= @tv_show.description %> </h4>
+  </p>
+
+  <p>
+    <strong>Country:</strong>
+    <%= @tv_show.country %>
+  </p>
+
+  <p>
+    <strong>Language:</strong>
+    <%= @tv_show.language %>
+  </p>
+
+  <p>
+    <strong>Director:</strong>
+    <% if @director %>
+      <%= @director.set_complete_name %>
+    <% end %>
+  </p>
+
+  <p>
+    <strong>Gender:</strong>
+    <% if @gender %>
+      <%= @gender.gender %>
+    <% end %>
+  </p>
+
+  <% if @imdb != []%>
+    <p>
+      <strong>Imdb Rating:</strong>
+      <%= @imdb[0]%>
+    </p>
+
+    <p>
+      <strong>Certification (Rescued from Imdb):</strong>
+      <% if @imdb[1] != nil %>
+        <%= @imdb[1]%>
+      <% else %>
+        Not found
+      <% end %>
+    </p>
+  <% end %>
+
+  <p>
+    <strong>Favorito</strong>
+    <% if user_signed_in? %>
+      <%if @favs != nil%>
+        <%if @favs.find_by(user_id: current_user.id, tv_show_id: @tv_show.id) != nil%>
+          <!--<%= @favs.find_by(user_id: current_user.id, tv_show_id: @tv_show.id).favorite%>-->
+        <%else%>
+          <%= button_to "Favorito", '/fav', method: :get, params: { user_id: current_user.id, tv_show_id: @tv_show.id }, class: "btn btn-danger" %>
+        <%end%>
+      <%else%>
+        <%= "False"%>
+        <%= button_to "Favorito", '/fav', method: :get,  params: { user_id: current_user.id, tv_show_id: @tv_show.id }, class: "btn btn-danger" %>
+      <%end%>
+    <% end %>
+  </p>
+
+</div>
+<br>
+<h1 style="color:rgb(38, 38, 38)">-</h1>
+<h1 style="color:rgb(38, 38, 38)">-</h1>
+<div class="container">
+  <h2>Trailer</h2>
+</div>
+<div class="container" style="text-align:center; background-color: black;padding:0;margin:0;">
+  <br>
+  <% if @tv_show.final_url? %>
+    <p>
+      <iframe width="560" height="315" src="<%= @tv_show.final_url %>" frameborder="0" allowfullscreen></iframe>
+    </p>
+  <% else %>
+    <h2 style="color:rgb(38, 38, 38)">Trailer no disponible</h2>
+  <% end %>
+  <br>
+</div>
+<div class="container">
+  <h2>Episodios</h2>
+</div>
+<br>
+<% if user_signed_in? %>
+  <% if current_user.role == 2 || current_user.id == @tv_show.user_id %>
+    <%= link_to "", new_tv_show_episode_path(@tv_show), class: "btn btn-danger fa fa-plus fa-lg" %>
+  <% end %>
+<% end %>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Season</th>
+      <th>Duration</th>
+      <th>Release Year</th>
+      <th>Seen </th>
+      <th>Rating </th>
+      <th>Modify </th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @tv_show.episodes.each do |episode| %>
+    <tr>
+    <td><%= link_to episode.name, tv_show_episode_path(@tv_show, episode) %></td>
+    <td><%= episode.description %></td>
+    <td><%= episode.season %></td>
+    <td><%= episode.duration %></td>
+    <td><%= episode.release_year %></td>
+    <td><%= episode.seen %></td>
+    <td><%= episode.rating %></td>
+      <% if user_signed_in? %>   <!-- SI EL USUARIO ESTA CONECTADO -->
+        <% if current_user.role != 2 %> <!-- SI EL USUARIO ≠ ADMIN -->
+          <% if @tv_show.user_id == current_user.id %>  <!-- SI EL USUARIO ES CREADOR DE LA SERIE -->
+              <td><%= link_to 'Edit', edit_tv_show_episode_path(@tv_show, episode) %></td>
+            </tr>
+          <% elsif User.find(@tv_show.user_id).role == 2 %> <!-- SI LA SERIE ES DE ADMIN -->
+            </tr>
+          <% end %>
+        <% else %> <!-- SI EL USUARIO = ADMIN -->
+          <td><%= link_to 'Edit', edit_tv_show_episode_path(@tv_show, episode) %></td>
+        </tr>
+        <% end %>
+      <% else %> <!-- SI EL USUARIO = VISITA -->
+        <% if User.find(@tv_show.user_id).role == 2 %>
+        </tr>
+        <% end %>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
+<br>
+<div class="container">
+  <h2>Comentarios</h2>
+  <br>
+</div>
+<% if user_signed_in? %>
+  <% if current_user.role == 2 || current_user.id == @tv_show.user_id %>
+    <%= link_to "", new_tv_show_comment_path(:tv_show_id=> @tv_show.id, :user_id => current_user.id), class: "btn btn-danger fa fa-plus fa-lg" %>
+  <% end %>
+<% end %>
+<br>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>User</th>
+        <th>Comment</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <%@tv_show_comments.each do |t|%>
+        <tr>
+        <td><%= @users.find(t.user_id).first_name%></td>
+        <td><%= t.content %></td>
+        <% if user_signed_in? %>
+          <%if current_user.id == t.user_id or current_user.role == 2%>
+            <td><%= link_to 'Delete', tv_show_comment_path(:id => t.id), method: :delete %></td>
+          <%else%>
+            <td><%= link_to '', '#' %></td>
+          <%end%>
+        <%end%>
+        </tr>
+      <%end%>
+    </tbody>
+  </table>

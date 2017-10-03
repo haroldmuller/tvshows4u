@@ -1,0 +1,42 @@
+<%= form_for(episode_ratin) do |f| %>
+  <% if episode_ratin.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(episode_ratin.errors.count, "error") %> prohibited this episode_ratin from being saved:</h2>
+
+      <ul>
+      <% episode_ratin.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :rating %>
+    <%= f.number_field :rating %>
+  </div>
+
+  <div class="field">
+    <%= f.label :favorite %>
+    <%= f.check_box :favorite %>
+  </div>
+
+  <div class="field">
+    <%= f.label :seen %>
+    <%= f.check_box :seen %>
+  </div>
+
+  <div class="field">
+    <%= f.label :user_id %>
+    <%= f.text_field :user_id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :episode_id %>
+    <%= f.text_field :episode_id %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

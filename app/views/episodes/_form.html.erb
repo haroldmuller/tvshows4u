@@ -1,0 +1,72 @@
+<%= form_for([@tv_show, @episode], :url => @url) do |f| %>
+  <% if @episode.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@episode.errors.count, "error") %> prohibited this episode from being saved:</h2>
+
+      <ul>
+      <% @episode.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %>
+    <br>
+    <%= f.text_field :name, style: "color:rgb(38, 38, 38)" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :season %>
+    <br>
+    <%= f.number_field :season, style: "color:rgb(38, 38, 38)" %>
+  </div>
+
+  <%if @episode.seen%>
+    <div class="field">
+      <%= f.label :rating %>
+      <br>
+      <%= f.number_field :rating, style: "color:rgb(38, 38, 38)" %>
+    </div>
+  <%end%>
+
+
+  <div class="field">
+    <%= f.label :description %>
+    <br>
+    <%= f.text_area :description, cols: 40, rows: 8, style: "color:rgb(38, 38, 38)" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :favorite %>
+    <br>
+    <%= f.check_box :favorite %>
+  </div>
+
+  <div class="field">
+    <%= f.label :seen %>
+    <br>
+    <%= f.check_box :seen %>
+  </div>
+
+  <div class="field">
+    <%= f.label :duration %>
+    <br>
+    <%= f.number_field :duration, style: "color:rgb(38, 38, 38)" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :release_year %>
+    <br>
+    <%= f.number_field :release_year, style: "color:rgb(38, 38, 38)" %>
+  </div>
+
+  <div class="field">
+    <%= f.hidden_field :tv_show_id, value: @tv_show.id %>
+  </div>
+  <br>
+  <div class="actions">
+    <%= f.submit :Save, class: "btn btn-danger", style: "color:white" %>
+  </div>
+<% end %>

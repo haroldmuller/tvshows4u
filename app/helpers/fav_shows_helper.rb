@@ -1,0 +1,2 @@
+module FavShowsHelper
+end

@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  rating: 1
+  favorite: false
+  seen: false
+  user: one
+  episode: one
+
+two:
+  rating: 1
+  favorite: false
+  seen: false
+  user: two
+  episode: two

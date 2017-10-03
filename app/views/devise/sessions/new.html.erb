@@ -1,0 +1,32 @@
+<div class="division bgimg" style="width:65%" >
+  <h1 style="padding:20px; color:white; opacity:1">Disfruta de la mejor plataforma para el seguimiento de tus series favoritas</h1>
+
+</div>
+<div class="division" style="text-align:left; padding-left:50px; width:35%">
+  <h2 style="text-align:center">Log in</h2>
+
+  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+    <div class="field">
+      <%= f.label :email %><br />
+      <%= f.email_field :email, autofocus: true, class:"form-control", placeholder: 'Ingrese correo electrónico' %>
+    </div>
+
+    <div class="field">
+      <%= f.label :password %><br />
+      <%= f.password_field :password, autocomplete: "off", class:"form-control", placeholder: 'Ingrese contraseña' %>
+    </div>
+
+    <% if devise_mapping.rememberable? -%>
+      <div class="field">
+        <%= f.check_box :remember_me %>
+        <%= f.label :remember_me %>
+      </div>
+    <% end -%>
+
+    <div class="actions" style="text-align:center">
+      <%= f.submit "Log in", class: "btn btn-danger" %>
+    </div>
+  <% end %>
+
+  <%= render "devise/shared/links" %>
+</div>

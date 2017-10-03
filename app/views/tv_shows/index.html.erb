@@ -1,0 +1,93 @@
+<p id="notice"><%= notice %></p>
+<% if @tv_shows.blank? %>
+  <h4>There are no tvshows founded/matches <%= params[:search] %>.</h4>
+<% end %>
+
+<h1>TV Shows</h1>
+<br>
+<% if user_signed_in? %>
+  <% if current_user.role != "child" %>
+    <%= link_to "", new_tv_show_path, class: "btn btn-danger fa fa-plus fa-lg" %>
+  <% end %>
+<% end %>
+<br>
+<table>
+
+
+  <%tv_shows_filtered = [] %>
+
+  <% @tv_shows.each do |tv_show| %>
+    <% if user_signed_in? %>
+      <% if current_user.role == 'admin' %><!-- SERIES PARA USUARIO ADMIN -->
+        <% tv_shows_filtered << tv_show %>
+      <% elsif current_user.role == 'common' %> <!-- SERIES PARA USUARIO COMÚN -->
+        <% if current_user.id == tv_show.user_id %>
+          <% tv_shows_filtered << tv_show %>
+        <% elsif User.find(tv_show.user_id).role == 'admin' %>
+          <% tv_shows_filtered << tv_show %>
+        <% end %>
+      <% else %>                                <!-- SERIES PARA USUARIO NIÑO -->
+        <% if User.find(tv_show.user_id).role == 'admin' %>
+          <% tv_shows_filtered << tv_show %>
+        <% end %>
+      <% end %>
+    <% else %>                                <!-- SERIES PARA USUARIO VISITA -->
+      <% if User.find(tv_show.user_id).role == 'admin' %>
+        <% tv_shows_filtered << tv_show %>
+      <% end %>
+    <% end %>
+  <% end %>
+
+
+
+
+</table>
+
+<br>
+<% tv_shows_filtered.in_groups_of(4, false).each do |group| %>
+  <div class='row'>
+    <% group.each do |tv_show| %>
+      <div class='col-md-3'>
+        <%= image_tag(tv_show.cover(:medium), class: "img-responsive") %>
+        <h3><%= tv_show.name %></h3>
+        <% if tv_show.description.length > 100 %>
+          <div style="align-text:justify"><%= tv_show.description[0,100] %>...</div>
+        <% elsif tv_show.description.length < 60 %>
+          <div style="align-text:justify"><%= tv_show.description %></div>
+          <br></br>
+        <% else %>
+          <div style="align-text:justify"><%= tv_show.description %></div>
+        <% end %>
+        <%= link_to 'See more', tv_show_path(tv_show.id), class: 'btn btn-danger btn-sm' %>
+        <% if user_signed_in? %>
+          <%= link_to 'Recommend', new_mailingl_form_path(:subject => @user.first_name+' '+
+          @user.last_name+' recommends you: '+tv_show.name,
+          :body => "I think you'd love this tv serie.",
+          :user_id => @user.id), class: 'btn btn-info btn-sm' %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+  <br>
+<% end %>
+
+<h1>Noticias del Admin</h1>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Nombre Serie</th>
+      <th>Nombre Admin</th>
+      <th>Contenido</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%@noticias_admin.each do |noti|%>
+    <tr>
+      <td><%=  noti.tv_show.name%></td>
+      <td><%=  noti.user.first_name%></td>
+      <td><%=  noti.content%></td>
+    </tr>
+    <%end%>
+  </tbody>
+</table>

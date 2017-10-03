@@ -1,0 +1,55 @@
+<p id="notice"><%= notice %></p>
+<h2>Favoritos</h2>
+<br>
+<h3>Series</h3>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Country</th>
+      <th>Language</th>
+      <th>Gender</th>
+      <th>Director</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @series_fav.each do |serie| %>
+      <tr>
+      <td><%=link_to serie.name, serie %></td>
+      <td><%= serie.description%></td>
+      <td><%= serie.country%></td>
+      <td><%= serie.language%></td>
+      <%if serie.gender_id != nil%>
+        <td><%= @genders.find(serie.gender_id).gender%></td>
+      <%end%>
+      <%if serie.director_id != nil%>
+        <td><%= @directors.find(serie.director_id).first_name%></td>
+      <%end%>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<h3>Episodes</h3>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Season</th>
+      <th>Duration</th>
+      <th>Serie</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @episodes_fav.each do |serie| %>
+      <tr>
+      <td><%= serie.name %></td>
+      <td><%= serie.description %></td>
+      <td><%= serie.season %></td>
+      <td><%= serie.duration %></td>
+      <td><%= @tv_shows.find(serie.tv_show_id).name %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

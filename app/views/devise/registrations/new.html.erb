@@ -1,0 +1,92 @@
+<div class="division bgimg" style="width:65%" >
+  <h1 style="padding:20px; color:white; opacity:1">Disfruta de la mejor plataforma para el seguimiento de tus series favoritas</h1>
+
+</div>
+<div class="division" style="text-align:left; padding-left:50px; width:35%">
+  <% if params[:child] %>
+    <h2 style="text-align:center">Sign up for Child</h2>
+    <br>
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :post, class: 'form-horizontal' }) do |f| %>
+      <%= devise_error_messages! %>
+      <div class="field">
+        <%= f.label :Nombre %><br>
+        <%= f.text_field :first_name, class:"form-control", placeholder: 'Ingrese nombre' %>
+      </div>
+
+      <div class="field">
+        <%= f.label :Apellido %><br>
+        <%= f.text_field :last_name, class:"form-control", placeholder: 'Ingrese apellido' %>
+      </div>
+
+      <div class="field">
+        <%= f.label :email %><br />
+        <%= f.email_field :email, autofocus: true, class:"form-control", placeholder: 'Ingrese correo electrónico' %>
+      </div>
+
+      <div class="field">
+        <% f.hidden_field :avatar, value: "/app/assets/images/avatar.png" %>
+        <%= f.hidden_field :role, :value => "child" %>
+      </div>
+
+      <div class="field">
+        <%= f.label :password %>
+        <% if @minimum_password_length %>
+        <em>(<%= @minimum_password_length %> characters minimum)</em>
+        <% end %><br />
+        <%= f.password_field :password, autocomplete: "off", class:"form-control", placeholder: 'Ingrese contraseña' %>
+      </div>
+
+      <div class="field">
+        <%= f.label :password_confirmation %><br />
+        <%= f.password_field :password_confirmation, autocomplete: "off", class:"form-control", placeholder: 'Ingrese nuevamente contraseña' %>
+      </div>
+      <br>
+      <div class="actions" style="text-align:center">
+        <%= f.submit "Sign up", class: "btn btn-danger" %>
+      </div>
+    <% end %>
+  <% else %>
+    <h2 style="text-align:center">Sign up</h2>
+    <br>
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :post, class: 'form-horizontal' }) do |f| %>
+      <%= devise_error_messages! %>
+      <div class="field">
+        <%= f.label :Nombre %><br>
+        <%= f.text_field :first_name, class:"form-control", placeholder: 'Ingrese nombre' %>
+      </div>
+
+      <div class="field">
+        <%= f.label :Apellido %><br>
+        <%= f.text_field :last_name, class:"form-control", placeholder: 'Ingrese apellido' %>
+      </div>
+
+      <div class="field">
+        <%= f.label :email %><br />
+        <%= f.email_field :email, autofocus: true, class:"form-control", placeholder: 'Ingrese correo electrónico' %>
+      </div>
+
+      <div class="field">
+        <% f.hidden_field :avatar, value: "/app/assets/images/avatar.png" %>
+        <% f.hidden_field :role, value: "common" %>
+      </div>
+
+      <div class="field">
+        <%= f.label :password %>
+        <% if @minimum_password_length %>
+        <em>(<%= @minimum_password_length %> characters minimum)</em>
+        <% end %><br />
+        <%= f.password_field :password, autocomplete: "off", class:"form-control", placeholder: 'Ingrese contraseña' %>
+      </div>
+
+      <div class="field">
+        <%= f.label :password_confirmation %><br />
+        <%= f.password_field :password_confirmation, autocomplete: "off", class:"form-control", placeholder: 'Ingrese nuevamente contraseña' %>
+      </div>
+      <br>
+      <div class="actions" style="text-align:center">
+        <%= f.submit "Sign up", class: "btn btn-danger" %>
+      </div>
+    <% end %>
+  <% end %>
+  <br>
+</div>

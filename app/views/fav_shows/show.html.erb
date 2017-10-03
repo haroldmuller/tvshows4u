@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @fav_show.user %>
+</p>
+
+<p>
+  <strong>Tv show:</strong>
+  <%= @fav_show.tv_show %>
+</p>
+
+<p>
+  <strong>Favorite:</strong>
+  <%= @fav_show.favorite %>
+</p>
+
+<%= link_to 'Edit', edit_fav_show_path(@fav_show) %> |
+<%= link_to 'Back', fav_shows_path %>

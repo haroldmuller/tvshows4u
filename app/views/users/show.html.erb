@@ -1,0 +1,55 @@
+<div class="col-sm-3">
+  <% if @user.avatar? %>
+    <div class="circular--landscape">
+      <%= image_tag @user.avatar(:medium) %>
+    </div>
+  <% else %>
+    <div class="circular--landscape">
+      <%= image_tag "http://file.vforum.vn/hinh/2014/5/anh-dai-dien-facebook-8.jpg" %>
+    </div>
+  <% end %>
+</div>
+<div class="col-sm-9 verticalLine">
+  <%= link_to "", edit_user_registration_path(current_user), class: "btn btn-danger fa fa-pencil fa-lg" %>
+  <span></span>
+  <%if @user.role.to_s != 'child'%>
+    <%= link_to "", register_path(:child => true), class: "btn btn-danger fa fa-user-plus fa-lg", style: "color:white" %>
+  <%end%>
+  <br></br>
+  <p>
+    <h4>Name</h4>
+    <%= @user.first_name + ' ' + @user.last_name %>
+  </p>
+  <p>
+    <h4>Mail</h4>
+    <%= @user.email %>
+  </p>
+  <p>
+    <h4>Permiso</h4>
+    <%= @user.role.to_s %>
+  </p>
+</div>
+<br>
+<br>
+<h4 style="color:rgb(38, 38, 38)">-</h4>
+<h3>Añadidas Recientemente</h3>
+
+<% @tv_shows.in_groups_of(4, false).each do |group| %>
+  <div class='row'>
+    <% group.each do |tv_show| %>
+      <div class='col-md-3'>
+        <%= image_tag(tv_show.cover(:medium), class: "img-responsive") %>
+        <h3><%= tv_show.name %></h3>
+        <%= link_to 'See more', tv_show_path(tv_show.id), class: 'btn btn-danger btn-sm' %>
+        <% if user_signed_in? %>
+          <%= link_to 'Recommend', new_mailingl_form_path(:subject => @user.first_name+' '+
+          @user.last_name+' recommends you: '+tv_show.name,
+          :body => "I think you'd love this tv serie.",
+          :user_id => @user.id), class: 'btn btn-info btn-sm' %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+<% end %>
+
+<br>
