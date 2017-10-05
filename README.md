@@ -1,4 +1,4 @@
-<h2> README </h2>
+<h2> TvShows4u - IIC2143 Ingeniería de Software </h2>
 
 La aplicación TvShows4u posee las siguientes funcionalidades:
 
